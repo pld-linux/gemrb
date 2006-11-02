@@ -17,7 +17,7 @@ BuildRequires:	SDL-devel >= 1.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_png:BuildRequires:	libpng-devel}
-BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,4 +53,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO %{name}/docs/en/*.txt
+#%doc AUTHORS ChangeLog NEWS README TODO %{name}/docs/en/*.txt
