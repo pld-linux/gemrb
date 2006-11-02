@@ -11,12 +11,14 @@ License:	GPL v2+
 Group:		Applications/Emulators
 Source0:	http://dl.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
 # Source0-md5:	5ccc073a21464a33ca0e712c5dba34b0
+Patch0:		%{name}-Makefile_am.patch
 URL:		http://gemrb.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	SDL-devel >= 1.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_png:BuildRequires:	libpng-devel}
+BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -33,8 +35,10 @@ Linux/Unix, MacOs i Windowsa. Silnik posiada kilka ulepszeñ.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -53,4 +57,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%doc AUTHORS ChangeLog NEWS README TODO %{name}/docs/en/*.txt
+%doc AUTHORS ChangeLog NEWS README TODO %{name}/docs/en/*.txt
+%attr(755,root,root) %{_bindir}/gemrb
+%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/*.so.0.0.0
+%{_libdir}/gemrb/*.la
+%attr(755,root,root) %{_libdir}/gemrb/*.so.0.0.0
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/GemRB.cfg
+%{_datadir}/gemrb
+%{_mandir}/man1/gemrb.1*
