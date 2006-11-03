@@ -12,6 +12,7 @@ Group:		Applications/Emulators
 Source0:	http://dl.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
 # Source0-md5:	5ccc073a21464a33ca0e712c5dba34b0
 Patch0:		%{name}-Makefile_am.patch
+Patch1:		%{name}-config_file.patch
 URL:		http://gemrb.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	SDL-devel >= 1.2
@@ -36,6 +37,7 @@ Linux/Unix, MacOs i Windowsa. Silnik posiada kilka ulepszeñ.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p1
 
 %build
 %{__libtoolize}
