@@ -1,0 +1,29 @@
+--- gemrb-0.2.7/gemrb/GemRB.cfg~	2006-11-03 02:32:35.000000000 +0100
++++ gemrb-0.2.7/gemrb/GemRB.cfg	2006-11-03 02:31:02.000000000 +0100
+@@ -150,7 +150,7 @@
+ #  enter the full path to the GemRB executable      #
+ #####################################################
+ 
+-GemRBPath=./
++GemRBPath=/usr/share/gemrb/
+ 
+ #####################################################
+ #  GemRB Cache Path [String]                        #
+@@ -160,7 +160,7 @@
+ #  Cache directory.                                 #
+ #####################################################
+ 
+-CachePath=./Cache/
++CachePath=/usr/share/gemrb/Cache/
+ 
+ #####################################################
+ #  GemRB GUI Scripts Path [String]                  #
+@@ -171,7 +171,7 @@
+ #  the 'GUIScript' subdirectory.                    #
+ #####################################################
+ 
+-GUIScriptsPath=./
++GUIScriptsPath=/usr/share/gemrb/
+ 
+ #####################################################
+ #  GemRB Plugins Path [String]                      #
