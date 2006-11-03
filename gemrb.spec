@@ -60,9 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO %{name}/docs/en/*.txt
 %attr(755,root,root) %{_bindir}/gemrb
 %{_libdir}/*.la
-%attr(755,root,root) %{_libdir}/*.so.0.0.0
+%attr(755,root,root) %{_libdir}/*.so*
 %{_libdir}/gemrb/*.la
-%attr(755,root,root) %{_libdir}/gemrb/*.so.0.0.0
+%attr(755,root,root) %{_libdir}/gemrb/*.so*
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/GemRB.cfg
 %{_datadir}/gemrb
 %{_mandir}/man1/gemrb.1*
