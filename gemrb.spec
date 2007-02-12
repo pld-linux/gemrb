@@ -3,7 +3,7 @@
 %bcond_without	png	# build without png
 #
 Summary:	Emulator of BioWare's Infinity game engine
-Summary(pl):	Emulator silnika gier Infinity firmy BioWare
+Summary(pl.UTF-8):   Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
 Version:	0.2.8
 Release:	0.1
@@ -29,10 +29,10 @@ This Game Engine is a port of the original Infinity Engine (the one of
 Baldur's Gate, Planescape: Torment, Icewind Dale) to Linux/Unix, MacOs
 X and Windows with some Enhancements.
 
-%description -l pl
-Silnik ten jest portem oryginalnego silnika Infinity Engine (uøywanego
-przez Baldur's Gate, Planescape: Torment, Icewind Dale) dla systemÛw
-Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeÒ.
+%description -l pl.UTF-8
+Silnik ten jest portem oryginalnego silnika Infinity Engine (u≈ºywanego
+przez Baldur's Gate, Planescape: Torment, Icewind Dale) dla system√≥w
+Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepsze≈Ñ.
 
 %prep
 %setup -q
