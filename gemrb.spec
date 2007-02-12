@@ -3,7 +3,7 @@
 %bcond_without	png	# build without png
 #
 Summary:	Emulator of BioWare's Infinity game engine
-Summary(pl.UTF-8):   Emulator silnika gier Infinity firmy BioWare
+Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
 Version:	0.2.8
 Release:	0.1
