@@ -1,5 +1,5 @@
---- gemrb-0.2.7/gemrb/GemRB.cfg~	2006-11-03 02:32:35.000000000 +0100
-+++ gemrb-0.2.7/gemrb/GemRB.cfg	2006-11-03 02:31:02.000000000 +0100
+--- gemrb-0.2.9/gemrb/GemRB.cfg.sample~	2007-03-03 14:50:56.000000000 +0100
++++ gemrb-0.2.9/gemrb/GemRB.cfg.sample	2007-07-19 23:23:38.000000000 +0200
 @@ -150,7 +150,7 @@
  #  enter the full path to the GemRB executable      #
  #####################################################
