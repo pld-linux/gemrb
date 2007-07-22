@@ -67,6 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/gemrb
 %attr(755,root,root) %{_libdir}/gemrb/*.so*
-%%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/GemRB.cfg.sample
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/GemRB.cfg.sample
 %{_datadir}/gemrb
 %{_mandir}/man1/gemrb.1*
