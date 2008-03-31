@@ -1,0 +1,14 @@
+--- gemrb-0.3.0/gemrb/Makefile.am~	2008-03-31 21:25:06.953251392 +0200
++++ gemrb-0.3.0/gemrb/Makefile.am	2008-03-31 21:24:49.149066914 +0200
+@@ -1,10 +1,9 @@
+ bin_PROGRAMS = gemrb
+-sysconf_DATA = GemRB.cfg.sample GemRB.cfg.subdir.sample
+ gemrb_SOURCES = GemRB.cpp 
+ 
+ gemrb_LDADD =  ./plugins/Core/libgemrb_core.la
+ 
+-SUBDIRS = plugins includes GUIScripts override docs
++SUBDIRS = plugins includes GUIScripts override
+ EXTRA_DIST = GemRB.cfg* plugins-prepare.sh
+ INCLUDES= \
+ 	$(all_includes) \
