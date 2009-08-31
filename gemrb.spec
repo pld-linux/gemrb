@@ -2,6 +2,7 @@
 # TODO:
 # - what about libgemrb_core.so* files?
 # - set proper path to Cache dir or create it in datadir
+# - make it builds on x86_64
 #
 # Conditional build:
 %bcond_without	png	# build without png
