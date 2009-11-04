@@ -10,12 +10,12 @@
 Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
-Version:	0.5.1
+Version:	0.6.0
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Emulators
-Source0:	http://dl.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
-# Source0-md5:	33a04902189a5d216fbd2f8749e281eb
+Source0:	http://downloads.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
+# Source0-md5:	797df7e3abf4b9a051572e83f3d70380
 Patch0:		%{name}-config_file.patch
 Patch1:		%{name}-useless_files.patch
 URL:		http://gemrb.sourceforge.net/
@@ -35,10 +35,9 @@ Baldur's Gate, Planescape: Torment, Icewind Dale) to Linux/Unix, MacOs
 X and Windows with some Enhancements.
 
 %description -l pl.UTF-8
-Silnik ten jest portem oryginalnego silnika Infinity Engine
-(używanego przez Baldur's Gate, Planescape: Torment, Icewind Dale)
-dla systemów Linux/Unix, MacOS i Windows. Silnik posiada kilka
-ulepszeń.
+Silnik ten jest portem oryginalnego silnika Infinity Engine (używanego
+przez Baldur's Gate, Planescape: Torment, Icewind Dale) dla systemów
+Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 
 %prep
 %setup -q

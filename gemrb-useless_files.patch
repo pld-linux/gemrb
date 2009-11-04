@@ -1,5 +1,5 @@
---- gemrb-0.3.0/gemrb/Makefile.am~	2008-03-31 21:25:06.953251392 +0200
-+++ gemrb-0.3.0/gemrb/Makefile.am	2008-03-31 21:24:49.149066914 +0200
+--- gemrb-0.6.0/gemrb/Makefile.am~	2009-08-28 15:37:50.000000000 +0200
++++ gemrb-0.6.0/gemrb/Makefile.am	2009-11-04 12:29:37.000000000 +0100
 @@ -1,10 +1,9 @@
  bin_PROGRAMS = gemrb
 -sysconf_DATA = GemRB.cfg.sample GemRB.cfg.subdir.sample
@@ -9,6 +9,6 @@
  
 -SUBDIRS = plugins includes GUIScripts override docs
 +SUBDIRS = plugins includes GUIScripts override
- EXTRA_DIST = GemRB.cfg* plugins-prepare.sh
+ EXTRA_DIST = GemRB.cfg* plugins-prepare.sh CMakeLists.txt
  INCLUDES= \
  	$(all_includes) \
