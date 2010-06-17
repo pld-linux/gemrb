@@ -1,14 +1,14 @@
---- gemrb-0.6.0/gemrb/Makefile.am~	2009-08-28 15:37:50.000000000 +0200
-+++ gemrb-0.6.0/gemrb/Makefile.am	2009-11-04 12:29:37.000000000 +0100
+--- gemrb-0.6.1/gemrb/Makefile.am~	2010-06-16 18:11:26.000000000 +0200
++++ gemrb-0.6.1/gemrb/Makefile.am	2010-06-17 13:45:59.317619658 +0200
 @@ -1,10 +1,9 @@
  bin_PROGRAMS = gemrb
 -sysconf_DATA = GemRB.cfg.sample GemRB.cfg.subdir.sample
  gemrb_SOURCES = GemRB.cpp 
  
- gemrb_LDADD =  ./plugins/Core/libgemrb_core.la
+ gemrb_LDADD =  ./core/libgemrb_core.la
  
--SUBDIRS = plugins includes GUIScripts override docs
-+SUBDIRS = plugins includes GUIScripts override
+-SUBDIRS = core plugins includes GUIScripts override docs
++SUBDIRS = core plugins includes GUIScripts override
  EXTRA_DIST = GemRB.cfg* plugins-prepare.sh CMakeLists.txt
- INCLUDES= \
- 	$(all_includes) \
+ 
+ gemrb_LDFLAGS = $(all_libraries) @LIBPTHREAD@
