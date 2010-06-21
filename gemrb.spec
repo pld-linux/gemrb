@@ -1,7 +1,5 @@
 #
 # TODO:
-# - what about libgemrb_core.so* files?
-# - set proper path to Cache dir or create it in datadir
 # - make it builds on x86_64
 #
 # Conditional build:
@@ -56,7 +54,7 @@ Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/gemrb/Cache}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -79,5 +77,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gemrb/plugins
 %attr(755,root,root) %{_libdir}/gemrb/plugins/*.so*
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gemrb.cfg
+%dir %{_datadir}/gemrb/Cache
 %{_datadir}/gemrb
 %{_mandir}/man6/gemrb.6*
