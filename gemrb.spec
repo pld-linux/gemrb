@@ -27,6 +27,7 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	zlib-devel
+Suggests:	unshield
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
