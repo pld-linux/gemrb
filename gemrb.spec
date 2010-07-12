@@ -1,10 +1,9 @@
-#
 # TODO:
-# - make it builds on x86_64
+# - make it build on x86_64
 #
 # Conditional build:
 %bcond_without	png	# build without png
-#
+
 Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
@@ -25,7 +24,7 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	zlib-devel
-Suggests:	unshield
+Suggests:	synce-unshield
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
