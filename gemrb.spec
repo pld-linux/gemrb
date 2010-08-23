@@ -7,12 +7,12 @@
 Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
-Version:	0.6.1
+Version:	0.6.2
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Emulators
 Source0:	http://downloads.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
-# Source0-md5:	3d7f10a0137b3a018d23540cdb676750
+# Source0-md5:	e1c582a8ac29e364cca1cabc8657ad87
 Patch0:		%{name}-config_file.patch
 Patch1:		%{name}-useless_files.patch
 URL:		http://gemrb.sourceforge.net/
@@ -58,7 +58,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/gemrb/Cache}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install gemrb/GemRB.cfg.sample $RPM_BUILD_ROOT%{_sysconfdir}/gemrb.cfg
+install gemrb/GemRB.cfg.sample.in $RPM_BUILD_ROOT%{_sysconfdir}/gemrb.cfg
 rm -f $RPM_BUILD_ROOT%{_libdir}{,/gemrb,/gemrb/plugins}/*.la
 
 %clean
