@@ -21,8 +21,11 @@ BuildRequires:	SDL-devel >= 1.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_png:BuildRequires:	libpng-devel}
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.0
+BuildRequires:	python-modules
 BuildRequires:	zlib-devel
 Suggests:	synce-unshield
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
