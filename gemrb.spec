@@ -20,6 +20,7 @@ BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
 BuildRequires:	cmake >= 3.1
 BuildRequires:	freetype-devel
+%{!?with_gles:BuildRequires:	glew-devel}
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	libvorbis-devel
