@@ -1,0 +1,75 @@
+From df493a7da7251eb5ea33b62a65580d09b440dd74 Mon Sep 17 00:00:00 2001
+From: cmitu <31816814+cmitu@users.noreply.github.com>
+Date: Wed, 2 Sep 2020 04:27:00 +0100
+Subject: [PATCH] add OpenGL shaders versioning for GLSL compatibility
+
+The GL context initialization in 'GLVideoDriver' requests OpenGL (ES) 2.0 from SDL2,
+but SDL2 doesn't guarantee the context returned will have the same version [1].
+
+To avoid any compatibility issues with a superior GLSL version, add the GLSL version to the shader code,
+depending on the GL context requested (non-ES vs. ES).
+ * when expecting an OpenGL 2.0 context, set version to 110
+ * when expecting an OpenGL ES 2.0 context, set version to 100
+
+[1] - https://wiki.libsdl.org/SDL_GLattr#OpenGL
+---
+ gemrb/plugins/SDLVideo/GLSLProgram.cpp  | 10 ++++++++--
+ gemrb/plugins/SDLVideo/SDL20GLVideo.cpp |  8 +++++---
+ 2 files changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/gemrb/plugins/SDLVideo/GLSLProgram.cpp b/gemrb/plugins/SDLVideo/GLSLProgram.cpp
+index 1d5ec51633..34f141002b 100644
+--- a/gemrb/plugins/SDLVideo/GLSLProgram.cpp
++++ b/gemrb/plugins/SDLVideo/GLSLProgram.cpp
+@@ -102,10 +102,16 @@ GLSLProgram* GLSLProgram::CreateFromFiles(std::string vertexSourceFileName, std:
+ 	return GLSLProgram::Create(vertexContent, fragmentContent);
+ }
+ 
+-GLuint GLSLProgram::buildShader(GLenum type, std::string source)
++GLuint GLSLProgram::buildShader(GLenum type, const std::string source)
+ {
++	std::string shader_source = source;
++#ifdef USE_GL
++	shader_source.insert(0, "#version 110\n");
++#else
++	shader_source.insert(0, "#version 100\n");
++#endif
+     GLuint id = glCreateShader(type);
+-	const char* src = source.c_str();
++	const char* src = shader_source.c_str();
+ 	glShaderSource(id, 1, &src, 0);
+     glCompileShader(id);
+     GLint result = GL_FALSE;
+diff --git a/gemrb/plugins/SDLVideo/SDL20GLVideo.cpp b/gemrb/plugins/SDLVideo/SDL20GLVideo.cpp
+index b28738317e..62eb361238 100644
+--- a/gemrb/plugins/SDLVideo/SDL20GLVideo.cpp
++++ b/gemrb/plugins/SDLVideo/SDL20GLVideo.cpp
+@@ -66,23 +66,25 @@ int GLVideoDriver::CreateDisplay(int w, int h, int bpp, bool fs, const char* tit
+ 	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, winFlags);
+ 	if (window == NULL) 
+ 	{
+-		Log(ERROR, "SDL 2 GL Driver", "couldnt create window:%s", SDL_GetError());
++		Log(ERROR, "SDL 2 GL Driver", "Unable to create window:%s", SDL_GetError());
+ 		return GEM_ERROR;
+ 	}
+ 
+ 	context = SDL_GL_CreateContext(window);
+ 	if (context == NULL) 
+ 	{
+-		Log(ERROR, "SDL 2 GL Driver", "couldnt create GL context:%s", SDL_GetError());
++		Log(ERROR, "SDL 2 GL Driver", "Unable to create GL context:%s", SDL_GetError());
+ 		return GEM_ERROR;
+ 	}
+ 	SDL_GL_MakeCurrent(window, context);
++	Log(MESSAGE, "SDL 2 GL Driver", "OpenGL version: %s, renderer: %s, vendor: %s", glGetString(GL_VERSION), glGetString(GL_RENDERER), glGetString(GL_VENDOR));
++	Log(MESSAGE, "SDL 2 GL Driver", "  GLSL version: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+ 
+ 	renderer = SDL_CreateRenderer(window, -1, 0);
+ 
+ 	if (renderer == NULL) 
+ 	{
+-		Log(ERROR, "SDL 2 GL Driver", "couldnt create renderer:%s", SDL_GetError());
++		Log(ERROR, "SDL 2 GL Driver", "Unable to create renderer:%s", SDL_GetError());
+ 		return GEM_ERROR;
+ 	}
+ 	SDL_RenderSetLogicalSize(renderer, width, height);

@@ -12,6 +12,7 @@ Group:		Applications/Emulators
 Source0:	https://downloads.sourceforge.net/gemrb/%{name}-%{version}-sources.tar.gz
 # Source0-md5:	d1bf1dd8ca03ce9649b52240d363f357
 Patch0:		%{name}-config_file.patch
+Patch1:		%{name}-gles.patch
 URL:		http://gemrb.sourceforge.net/
 BuildRequires:	OpenAL-devel
 %{!?with_gles:BuildRequires:	OpenGL-devel}
@@ -49,6 +50,7 @@ Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %{__sed} -i -e '1s,/usr/bin/python$,%{__python},' admin/extend2da.py
 
