@@ -1,20 +1,32 @@
---- gemrb-0.6.2/gemrb/GemRB.cfg.sample.in~	2010-08-20 19:49:10.000000000 +0200
-+++ gemrb-0.6.2/gemrb/GemRB.cfg.sample.in	2010-08-23 09:46:33.358610584 +0200
-@@ -194,7 +194,7 @@
- #  enter the full path to the GemRB executable      #
+--- gemrb-0.8.7/gemrb/GemRB.cfg.sample.in.orig	2021-04-23 12:11:03.909680837 +0200
++++ gemrb-0.8.7/gemrb/GemRB.cfg.sample.in	2021-04-23 12:16:48.730617624 +0200
+@@ -157,7 +157,7 @@
+ #  Remember, EE versions are not supported!         #
  #####################################################
  
+-GamePath=/mnt/windows/Programmi/Black Isle/BGII - SoA/
++GamePath=./
+ # only set these if the folders are not in your GamePath
+ #CD1=/mnt/windows/Programmi/Black Isle/BGII - SoA/
+ #CD2=/mnt/windows/Programmi/Black Isle/BGII - SoA/CD2/
+@@ -173,7 +173,7 @@
+ #  Cache directory.                                 #
+ #####################################################
+ 
+-CachePath=@DEFAULT_CACHE_DIR@
++CachePath=~/.cache/gemrb
+ 
+ #####################################################
+ #  GemRB Save Path [String]                         #
+@@ -200,10 +200,7 @@
+ #####################################################
+ 
+ # preconfigured path
 -#GemRBPath=@DATA_DIR@
+-
+-# path for official binaries
+-GemRBPath=.
 +GemRBPath=@DATA_DIR@
  
  #####################################################
  #  GemRB GUI Scripts Path [String]                  #
-@@ -205,7 +205,7 @@
- #  the 'GUIScript' subdirectory.                    #
- #####################################################
- 
--#GUIScriptsPath=@DATA_DIR@
-+GUIScriptsPath=@DATA_DIR@
- 
- #####################################################
- #  GemRB Plugins Path [String]                      #

@@ -1,32 +1,37 @@
-# TODO:
-# - make it build on x86_64
 #
 # Conditional build:
-%bcond_without	png	# build without png
+%bcond_with	gles	# build GLES backend
 
 Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
-Version:	0.7.0
+Version:	0.8.7
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Emulators
-Source0:	http://downloads.sourceforge.net/gemrb/%{name}-%{version}.tar.gz
-# Source0-md5:	0bb891db41d6f69e8414bdce808b32f8
+Source0:	https://downloads.sourceforge.net/gemrb/%{name}-%{version}-sources.tar.gz
+# Source0-md5:	d1bf1dd8ca03ce9649b52240d363f357
 Patch0:		%{name}-config_file.patch
-Patch1:		%{name}-useless_files.patch
 URL:		http://gemrb.sourceforge.net/
 BuildRequires:	OpenAL-devel
-BuildRequires:	SDL-devel >= 1.2
-BuildRequires:	autoconf
-BuildRequires:	automake
-%{?with_png:BuildRequires:	libpng-devel}
-BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+%{!?with_gles:BuildRequires:	OpenGL-devel}
+%{?with_gles:BuildRequires:	OpenGLESv2-devel}
+BuildRequires:	SDL2-devel
+BuildRequires:	SDL2_mixer-devel
+BuildRequires:	cmake >= 3.1
+BuildRequires:	freetype-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libstdc++-devel >= 6:4.8.1
+BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.0
 BuildRequires:	python-modules
+BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	vlc-devel
 BuildRequires:	zlib-devel
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
 Suggests:	synce-unshield
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,41 +48,60 @@ Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+
+%{__sed} -i -e '1s,/usr/bin/python$,%{__python},' admin/extend2da.py
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure
+install -d build
+cd build
+%cmake .. \
+	-DBIN_DIR="%{_bindir}" \
+	-DSYSCONF_DIR="%{_sysconfdir}/gemrb" \
+	-DLIB_DIR="%{_libdir}" \
+	-DPLUGIN_DIR="%{_libdir}/gemrb/plugins" \
+	-DDATA_DIR="%{_datadir}/gemrb" \
+	-DMAN_DIR="%{_mandir}/man6" \
+	-DICON_DIR="%{_pixmapsdir}" \
+	-DSVG_DIR="%{_iconsdir}/hicolor/scalable/apps" \
+	-DMENU_DIR="%{_desktopdir}" \
+	-DOPENGL_BACKEND=%{!?with_gles:OpenGL}%{?with_gles:GLES} \
+	-DSDL_BACKEND=SDL2
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/gemrb/Cache}
 
-%{__make} install \
+%{__make} install -C build \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install gemrb/GemRB.cfg.sample.in $RPM_BUILD_ROOT%{_sysconfdir}/gemrb.cfg
-%{__rm} $RPM_BUILD_ROOT%{_libdir}{,/gemrb/plugins}/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}
+%{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/gemrb/GemRB.cfg{.noinstall,}.sample
+%{__mv} $RPM_BUILD_ROOT%{_sysconfdir}/gemrb/{GemRB.cfg,gemrb.cfg}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post
+/sbin/ldconfig
+%update_desktop_database_post
+%update_icon_cache hicolor
+
+%postun
+/sbin/ldconfig
+%update_desktop_database_postun
+%update_icon_cache hicolor
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO %{name}{/docs/en/*.txt,/GemRB.cfg*.sample}
+%doc AUTHORS CONTRIBUTING.md NEWS README.md %{name}/{docs/en/*.txt,GemRB.cfg*.sample}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gemrb/gemrb.cfg
 %attr(755,root,root) %{_bindir}/gemrb
+%attr(755,root,root) %{_libdir}/libgemrb_core.so.*.*.*
 %dir %{_libdir}/gemrb
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/gemrb/plugins
-%attr(755,root,root) %{_libdir}/gemrb/plugins/*.so*
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gemrb.cfg
+%attr(755,root,root) %{_libdir}/gemrb/plugins/*.so
 %{_datadir}/gemrb
 %{_mandir}/man6/gemrb.6*
+%{_desktopdir}/gemrb.desktop
+%{_iconsdir}/hicolor/scalable/apps/gemrb.svg
+%{_pixmapsdir}/gemrb.png
