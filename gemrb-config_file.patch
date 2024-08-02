@@ -1,32 +1,11 @@
 --- gemrb-0.8.7/gemrb/GemRB.cfg.sample.in.orig	2021-04-23 12:11:03.909680837 +0200
 +++ gemrb-0.8.7/gemrb/GemRB.cfg.sample.in	2021-04-23 12:16:48.730617624 +0200
-@@ -157,7 +157,7 @@
- #  Remember, EE versions are not supported!         #
- #####################################################
- 
--GamePath=/mnt/windows/Programmi/Black Isle/BGII - SoA/
-+GamePath=./
- # only set these if the folders are not in your GamePath
- #CD1=/mnt/windows/Programmi/Black Isle/BGII - SoA/
- #CD2=/mnt/windows/Programmi/Black Isle/BGII - SoA/CD2/
 @@ -173,7 +173,7 @@
- #  Cache directory.                                 #
- #####################################################
+ #PluginsPath=@DEFAULT_PLUGINS_DIR@
  
+ # This is the path where GemRB will store cached files, enter the full path.
 -CachePath=@DEFAULT_CACHE_DIR@
 +CachePath=~/.cache/gemrb
  
- #####################################################
- #  GemRB Save Path [String]                         #
-@@ -200,10 +200,7 @@
- #####################################################
- 
- # preconfigured path
--#GemRBPath=@DATA_DIR@
--
--# path for official binaries
--GemRBPath=.
-+GemRBPath=@DATA_DIR@
- 
- #####################################################
- #  GemRB GUI Scripts Path [String]                  #
+ # The path where GemRB looks for non-BAM fonts (eg. TTF)
+ #CustomFontPath=

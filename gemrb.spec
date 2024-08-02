@@ -1,33 +1,32 @@
 #
 # Conditional build:
-%bcond_with	gles	# build GLES backend
+%bcond_with	gles	# build GLES backend (broken)
 
 Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
-Version:	0.8.7
+Version:	0.9.3
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Emulators
 Source0:	https://downloads.sourceforge.net/gemrb/%{name}-%{version}-sources.tar.gz
-# Source0-md5:	d1bf1dd8ca03ce9649b52240d363f357
+# Source0-md5:	c64c502ae714ed7ff8b3057cd8937a01
 Patch0:		%{name}-config_file.patch
-Patch1:		%{name}-gles.patch
 URL:		http://gemrb.sourceforge.net/
 BuildRequires:	OpenAL-devel
 %{!?with_gles:BuildRequires:	OpenGL-devel}
 %{?with_gles:BuildRequires:	OpenGLESv2-devel}
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
-BuildRequires:	cmake >= 3.1
+BuildRequires:	cmake >= 3.19
 BuildRequires:	freetype-devel
 %{!?with_gles:BuildRequires:	glew-devel}
 BuildRequires:	libpng-devel
-BuildRequires:	libstdc++-devel >= 6:4.8.1
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.3.0
-BuildRequires:	python-modules
+BuildRequires:	python3-devel
+BuildRequires:	python3-modules
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	vlc-devel
 BuildRequires:	zlib-devel
@@ -50,9 +49,8 @@ Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
-%{__sed} -i -e '1s,/usr/bin/python$,%{__python},' admin/extend2da.py
+%{__sed} -i -e '1s,/usr/bin/python$,%{__python3},' admin/extend2da.py
 
 %build
 install -d build
@@ -108,3 +106,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/gemrb.desktop
 %{_iconsdir}/hicolor/scalable/apps/gemrb.svg
 %{_pixmapsdir}/gemrb.png
+%{_datadir}/metainfo/org.gemrb.gemrb.metainfo.xml
