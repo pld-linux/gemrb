@@ -6,7 +6,7 @@ Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
 Version:	0.9.3
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Emulators
 Source0:	https://downloads.sourceforge.net/gemrb/%{name}-%{version}-sources.tar.gz
