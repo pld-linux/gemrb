@@ -6,7 +6,7 @@ Summary:	Emulator of BioWare's Infinity game engine
 Summary(pl.UTF-8):	Emulator silnika gier Infinity firmy BioWare
 Name:		gemrb
 Version:	0.9.4
-Release:	
+Release:	2
 License:	GPL v2+
 Group:		Applications/Emulators
 Source0:	https://downloads.sourceforge.net/gemrb/%{name}-sources-%{version}.tar.gz
@@ -49,8 +49,8 @@ Linux/Unix, MacOS i Windows. Silnik posiada kilka ulepszeń.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
 
 %{__sed} -i -e '1s,/usr/bin/python$,%{__python3},' admin/extend2da.py
 
